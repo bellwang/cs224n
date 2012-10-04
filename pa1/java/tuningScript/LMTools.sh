@@ -1,6 +1,6 @@
 #n-gram LM
 cd
-cd CS224Ngit/cs224n/pa1-mt
+cd cs224n/pa1-mt
 ln -s /afs/ir/class/cs224n/pa1/data/mt/lm.bin
 ln -s /afs/ir/class/cs224n/pa1/data/mt/mt-dev.fr
 ln -s /afs/ir/class/cs224n/pa1/data/mt/mt-dev.en

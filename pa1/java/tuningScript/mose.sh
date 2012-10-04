@@ -4,7 +4,7 @@
 #3. Tuning algorithm (MERT vs. PRO)—learning algorithm for optimizing the log-linear model parameters. =>$3
 
 #setup training models
-set HOME=~/CS224Ngit/cs224n/pa1-mt
+set HOME=~/cs224n/pa1-mt
 set MOSES=/afs/ir/class/cs224n/bin/mosesdecoder
 set GIZA=/afs/ir/class/cs224n/bin/giza-pp-read-only/external-bin-dir
 mkdir -p $HOME/train/model
