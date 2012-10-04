@@ -37,8 +37,7 @@ public class PMIModel implements WordAligner {
 			double sCounts = 0;
 			source = sentencePair.getSourceWords().get(srcIndex);
 			sCounts = sourceCounts.getCount(source);
-			// index from -1 because we need to consider the case that source word e is aligned to NULL
-			for(int tgtIndex =-1; tgtIndex < numTargetWords; tgtIndex++)
+			for(int tgtIndex = 0; tgtIndex < numTargetWords; tgtIndex++)
 			{
 				target = sentencePair.getTargetWords().get(tgtIndex);
 				tgtCounts = targetCounts.getCount(target);
