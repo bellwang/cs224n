@@ -4,9 +4,9 @@
 #3. Tuning algorithm (MERT vs. PRO)—learning algorithm for optimizing the log-linear model parameters. =>$3
 
 #setup training models
-set HOME=~/cs224n/pa1-mt
-set MOSES=/afs/ir/class/cs224n/bin/mosesdecoder
-set GIZA=/afs/ir/class/cs224n/bin/giza-pp-read-only/external-bin-dir
+HOME=~/cs224n/pa1-mt
+MOSES=/afs/ir/class/cs224n/bin/mosesdecoder
+GIZA=/afs/ir/class/cs224n/bin/giza-pp-read-only/external-bin-dir
 mkdir -p $HOME/train/model
 $MOSES/scripts/training/train-model.perl --max-phrase-length 6 \
 --external-bin-dir $GIZA --first-step 4 --last-step 9 \
@@ -18,7 +18,7 @@ $MOSES/scripts/training/train-model.perl --max-phrase-length 6 \
 mkdir -p $HOME/tune
 $MOSES/scripts/training/mert-moses.pl \
 --working-dir $HOME/tune\
---decoder-flags="-distortion-limit 4" $HOME/mt-dev.fr $HOME/mt-dev.en \
+--decoder-flags="-distortion-limit 6" $HOME/mt-dev.fr $HOME/mt-dev.en \
 $MOSES/bin/moses $HOME/train/model/moses.ini --mertdir $MOSES/bin/
 
 #You can re-tune with PRO by adding the --pairwise-ranked argument to the tuning command (you don’t need to re-run phrase table extraction).
