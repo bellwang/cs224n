@@ -33,7 +33,7 @@ then
 echo "##############################run MERT Tuning."
 mkdir -p $HOME/tune
 $MOSES/scripts/training/mert-moses.pl \
---working-dir $HOME/tune\
+--working-dir $HOME/tune \
 --decoder-flags="-distortion-limit $1" $HOME/mt-dev.fr $HOME/mt-dev.en \
 $MOSES/bin/moses $HOME/train/model/moses.ini --mertdir $MOSES/bin/
 else
