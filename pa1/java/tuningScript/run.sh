@@ -26,10 +26,11 @@ HOME=~/cs224n/pa1-mt
 MOSES=/afs/ir/class/cs224n/bin/mosesdecoder
 GIZA=/afs/ir/class/cs224n/bin/giza-pp-read-only/external-bin-dir
 
-if [ $2 eq 0]
+
+if  [  "$2"  == "0" ]
 then
 #tune with MERT
-echo "run MERT Tuning."
+echo "##############################run MERT Tuning."
 mkdir -p $HOME/tune
 $MOSES/scripts/training/mert-moses.pl \
 --working-dir $HOME/tune\
@@ -37,11 +38,11 @@ $MOSES/scripts/training/mert-moses.pl \
 $MOSES/bin/moses $HOME/train/model/moses.ini --mertdir $MOSES/bin/
 else
 #tune with PRO
-echo "run PRO Tuning."
+echo "##############################run PRO Tuning."
 mkdir -p $HOME/tune
 $MOSES/scripts/training/mert-moses.pl \
---pairwise-ranked\
---working-dir $HOME/tune\
+--pairwise-ranked \
+--working-dir $HOME/tune \
 --decoder-flags="-distortion-limit $1" $HOME/mt-dev.fr $HOME/mt-dev.en \
 $MOSES/bin/moses $HOME/train/model/moses.ini --mertdir $MOSES/bin/
 fi
@@ -96,4 +97,4 @@ do
 done
 
 #for different tuning parameters
-#Tuning 16 0
+Tuning 12 1
