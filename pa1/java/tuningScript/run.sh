@@ -72,29 +72,42 @@ set GIZA=/afs/ir/class/cs224n/bin/giza-pp-read-only/external-bin-dir
 mkdir -p $HOME/train/model
 
 #####i = fixed max-phrase-length
-for i in 7 8
+for i in 7 8 9
 do
 	echo "1##############################Phrase Extraction $i"
 	#PhraseTableExtraction $i
 
 	##### j = distortion limit
-	for j in 12 13 14
+	for j in 5 10 15 20
 	do
+		START=$(date +%s)
+		echo "$i $j 0" >> output
+
 		echo "2##############################Tuning MERT $j"
-		#Tuning $j 0
+		Tuning $j 0
 
 		echo "3##############################Start to Evaluation"
-		echo "$i $j 0" >> output
-		#Evaluation
+		Evaluation
+
+		END=$(date +%s)
+		DIFF=$(( $END - $START ))
+		echo "$DIFF seconds" >> output
+
+
+		START=$(date +%s)
+		echo "$i $j 1" >> output
 
 		echo "2##############################Tuning PRO $j"
-		#Tuning $j 1
+		Tuning $j 1
 
 		echo "3##############################Start to Evaluation"
-		echo "$i $j 1" >> output
-		#Evaluation
+		Evaluation
+
+		END=$(date +%s)
+		DIFF=$(( $END - $START ))
+		echo "$DIFF seconds" >> output
 	done
 done
 
 #for different tuning parameters
-Tuning 12 1
+#Tuning 12 0
