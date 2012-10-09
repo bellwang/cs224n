@@ -63,19 +63,19 @@ $MOSES/scripts/generic/multi-bleu.perl mt-dev-test.en < mt-dev-test.out >> outpu
 ################################################################
 #####################RUNNING STAGE############################
 ################################################################
-cd
-cd cs224n/pa1-mt
-
 set HOME=~/cs224n/pa1-mt
 set MOSES=/afs/ir/class/cs224n/bin/mosesdecoder
 set GIZA=/afs/ir/class/cs224n/bin/giza-pp-read-only/external-bin-dir
+
+cd
+cd cs224n/pa1-mt
 mkdir -p $HOME/train/model
 
 #####i = fixed max-phrase-length
-for i in 7 8 9
+for i in 8 9
 do
-	echo "1##############################Phrase Extraction $i"
-	#PhraseTableExtraction $i
+	echo "1##############################Phrase Extraction $i" >> output
+	PhraseTableExtraction $i
 
 	##### j = distortion limit
 	for j in 5 10 15 20
@@ -83,24 +83,27 @@ do
 		START=$(date +%s)
 		echo "$i $j 0" >> output
 
-		echo "2##############################Tuning MERT $j"
+		echo "2##############################Tuning MERT $j" >> output
 		Tuning $j 0
 
-		echo "3##############################Start to Evaluation"
+		echo "3##############################Start to Evaluation" >> output
 		Evaluation
 
 		END=$(date +%s)
 		DIFF=$(( $END - $START ))
 		echo "$DIFF seconds" >> output
 
+		echo " ##############################Clean Up" >> output
+		
+
 
 		START=$(date +%s)
 		echo "$i $j 1" >> output
 
-		echo "2##############################Tuning PRO $j"
+		echo "4##############################Tuning PRO $j" >> output
 		Tuning $j 1
 
-		echo "3##############################Start to Evaluation"
+		echo "5##############################Start to Evaluation" >> output
 		Evaluation
 
 		END=$(date +%s)
